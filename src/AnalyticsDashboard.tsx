@@ -887,6 +887,449 @@ const AnalyticsDashboard: React.FC = () => {
                 </div>
               </div>
             )}
+
+            {activePackageTab === 'branding' && (
+              <div className="packages-grid">
+                <div className="package-card">
+                  <h3 className="package-name">Essentials</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$149</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>We visualize your idea into a wire frame.</li>
+                    <li>You get 3 Logo Designs as per your briefing &amp; fine tune the one you select.</li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Foundation</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$299</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>We visualize your idea into a wire frame.</li>
+                    <li>You get 3 Logo Designs as per your briefing &amp; fine tune the one you select.</li>
+                    <li>
+                      A Detailed Branding portfolio on fonts, colors &amp; typography perfect for
+                      long-term workability.
+                    </li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Evolution</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$499</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>We visualize your idea into a wire frame.</li>
+                    <li>You get 3 Logo Designs as per your briefing &amp; fine tune the one you select.</li>
+                    <li>
+                      A Detailed Branding portfolio on fonts, colors &amp; typography perfect for
+                      long-term workability.
+                    </li>
+                    <li>
+                      We design 3 Stationary designs for your brand like Letter Heads, Visiting
+                      Cards &amp; policy envelopes.
+                    </li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Luxe</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$599</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>We visualize your idea into a wire frame.</li>
+                    <li>You get 3 Logo Designs as per your briefing &amp; fine tune the one you select.</li>
+                    <li>
+                      A Detailed Branding portfolio on fonts, colors &amp; typography perfect for
+                      long-term workability.
+                    </li>
+                    <li>
+                      We design 3 Stationary designs for your brand like Letter Heads, Visiting
+                      Cards &amp; policy envelopes.
+                    </li>
+                    <li>
+                      We design a brochure or your company&apos;s profile to send it across to your
+                      targeted audience (Max: 15 Pages).
+                    </li>
+                    <li>
+                      Print media consultation for getting your stationary and profile printed with
+                      the best possible quality.
+                    </li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+              </div>
+            )}
+
+            {activePackageTab === 'website' && (
+              <div className="packages-grid">
+                <div className="package-card">
+                  <h3 className="package-name">Essentials</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$499</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>Number of pages: 4</li>
+                    <li>Google Site Kit</li>
+                    <li>Write Copy Content: up to 1000 words</li>
+                    <li>Setting up Domain &amp; Hosting</li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Foundation</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$799</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>Number of pages: 6</li>
+                    <li>Google Site Kit</li>
+                    <li>Write Copy Content: up to 2000 words</li>
+                    <li>Setting up Domain &amp; Hosting</li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Evolution</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$999</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>Number of pages: 10</li>
+                    <li>Google Site Kit</li>
+                    <li>Write Copy Content: up to 3000 words</li>
+                    <li>Setting up Domain &amp; Hosting</li>
+                    <li>On-site SEO for Content and Tags</li>
+                    <li>Blog Uploads</li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Luxe</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$1499</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>Number of pages: 14</li>
+                    <li>Google Site Kit</li>
+                    <li>Write Copy Content: up to 4000 words</li>
+                    <li>Setting up Domain &amp; Hosting</li>
+                    <li>On-site SEO for Content and Tags</li>
+                    <li>Blog Uploads</li>
+                    <li>Custom UI/UX Designs</li>
+                    <li>Plugin Integration</li>
+                    <li>Revisions</li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+              </div>
+            )}
+
+            {activePackageTab === 'app' && (
+              <div className="packages-grid">
+                <div className="package-card">
+                  <h3 className="package-name">Essentials</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$1999</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>We develop your app according to your UI/UX.</li>
+                    <li>We optimize your app for various devices and screens.</li>
+                    <li>
+                      API Integration refers to the connection of 3rd party services (Up to 1
+                      Integrations).
+                    </li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Foundation</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$2999</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>We develop your app according to your UI/UX.</li>
+                    <li>We optimize your app for various devices and screens.</li>
+                    <li>
+                      API Integration refers to the connection of 3rd party services (Up to 2
+                      Integrations).
+                    </li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Evolution</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$3499</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>We develop your app according to your UI/UX.</li>
+                    <li>We optimize your app for various devices and screens.</li>
+                    <li>
+                      API Integration refers to the connection of 3rd party services (Up to 3
+                      Integrations).
+                    </li>
+                    <li>We help you launch your app on the iOS &amp; Android App Store.</li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Luxe</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$4999</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>We develop your app according to your UI/UX.</li>
+                    <li>We optimize your app for various devices and screens.</li>
+                    <li>
+                      API Integration refers to the connection of 3rd party services (Up to 4
+                      Integrations).
+                    </li>
+                    <li>We help you launch your app on the iOS &amp; Android App Store.</li>
+                    <li>We upload your app on the iOS &amp; Play Store.</li>
+                    <li>
+                      We make your app compliant with data collection regulations in various
+                      countries.
+                    </li>
+                    <li>
+                      We redirect the servers after the app has been uploaded to the store.
+                    </li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+              </div>
+            )}
+
+            {activePackageTab === 'uiux' && (
+              <div className="packages-grid">
+                <div className="package-card">
+                  <h3 className="package-name">Essentials</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$599</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>
+                      We research your product with constant sessions with you to learn more about
+                      your final product.
+                    </li>
+                    <li>
+                      We wireframe your product to understand how the connection flow is going to
+                      look like.
+                    </li>
+                    <li>
+                      We work on making the user experience of your product more adaptive.
+                    </li>
+                    <li>
+                      We design the user interface of your product to make it aesthetically
+                      pleasing.
+                    </li>
+                    <li>
+                      We provide you with a working prototype of your product to give you an idea of
+                      its functionality (Up to 55 Screens).
+                    </li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Foundation</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$999</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>
+                      We research your product with constant sessions with you to learn more about
+                      your final product.
+                    </li>
+                    <li>
+                      We wireframe your product to understand how the connection flow is going to
+                      look like.
+                    </li>
+                    <li>
+                      We work on making the user experience of your product more adaptive.
+                    </li>
+                    <li>
+                      We design the user interface of your product to make it aesthetically
+                      pleasing.
+                    </li>
+                    <li>
+                      We provide you with a working prototype of your product to give you an idea of
+                      its functionality (Up to 75 Screens).
+                    </li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Evolution</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$1499</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>
+                      We research your product with constant sessions with you to learn more about
+                      your final product.
+                    </li>
+                    <li>
+                      We wireframe your product to understand how the connection flow is going to
+                      look like.
+                    </li>
+                    <li>
+                      We work on making the user experience of your product more adaptive.
+                    </li>
+                    <li>
+                      We design the user interface of your product to make it aesthetically
+                      pleasing.
+                    </li>
+                    <li>
+                      We provide you with a working prototype of your product to give you an idea of
+                      its functionality (Up to 95 Screens).
+                    </li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+
+                <div className="package-card">
+                  <h3 className="package-name">Luxe</h3>
+                  <p className="package-subtitle">
+                    Free Trail Insights Art Plan
+                    <br />
+                    Ideal for beginner artists.
+                  </p>
+                  <div className="package-price-row">
+                    <span className="package-price">$2499</span>
+                    <span className="package-period">per month</span>
+                  </div>
+                  <ul className="package-features">
+                    <li>
+                      We research your product with constant sessions with you to learn more about
+                      your final product.
+                    </li>
+                    <li>
+                      We wireframe your product to understand how the connection flow is going to
+                      look like.
+                    </li>
+                    <li>
+                      We work on making the user experience of your product more adaptive.
+                    </li>
+                    <li>
+                      We design the user interface of your product to make it aesthetically
+                      pleasing.
+                    </li>
+                    <li>
+                      We provide you with a working prototype of your product to give you an idea of
+                      its functionality (Up to 135 Screens).
+                    </li>
+                    <li>We test the UI with various target audiences to ensure usability.</li>
+                    <li>We analyze your product and prepare an in-depth product analysis.</li>
+                  </ul>
+                  <button className="package-button">Add To Cart</button>
+                </div>
+              </div>
+            )}
           </section>
         )}
 
