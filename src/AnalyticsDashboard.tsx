@@ -9,6 +9,12 @@ const AnalyticsDashboard: React.FC = () => {
   const [activePackageTab, setActivePackageTab] = useState<
     'everything' | 'reputation' | 'branding' | 'website' | 'app' | 'uiux'
   >('everything');
+  const [activeAccountTab, setActiveAccountTab] = useState<
+    'subscription' | 'details' | 'logout'
+  >('subscription');
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   return (
     <div className="analytics-app">
@@ -70,18 +76,206 @@ const AnalyticsDashboard: React.FC = () => {
         <header className="top-bar">
           <div>
             <h1 className="page-title">
-              {activeSection === 'analytics' && 'Analytics'}
-              {activeSection === 'audit' && 'Audit Report'}
-              {activeSection === 'packages' && 'Packages'}
-              {activeSection === 'account' && 'Account'}
+              {(showCheckout || showThankYou) && 'CHECKOUT'}
+              {!showCheckout && !showThankYou && activeSection === 'analytics' && 'Analytics'}
+              {!showCheckout && !showThankYou && activeSection === 'audit' && 'Audit Report'}
+              {!showCheckout && !showThankYou && activeSection === 'packages' && 'Packages'}
+              {!showCheckout && !showThankYou && activeSection === 'account' && 'Account'}
             </h1>
             <p className="page-subtitle">
-              View Recent Schemas Below, See All in Schema History.
+              {showCheckout || showThankYou
+                ? 'Shipping & Billing'
+                : 'View Recent Schemas Below, See All in Schema History.'}
             </p>
           </div>
-          <button className="cart-button">Shopping cart</button>
+          {showCheckout || showThankYou ? (
+            <button
+              className="cart-button"
+              type="button"
+              onClick={() => {
+                setShowCheckout(false);
+                setShowThankYou(false);
+              }}
+            >
+              Back to Dashboards
+            </button>
+          ) : (
+            <button
+              className="cart-button"
+              type="button"
+              onClick={() => setIsCartOpen(true)}
+            >
+              Shopping cart
+            </button>
+          )}
         </header>
-        {activeSection === 'analytics' && (
+
+        {showThankYou && (
+          <section className="thankyou-card">
+            <div className="thankyou-icon">
+              <span className="thankyou-check">✓</span>
+            </div>
+            <h2 className="thankyou-title">Thank You</h2>
+            <p className="thankyou-text">
+              Check your email for order confirmation.
+            </p>
+          </section>
+        )}
+
+        {showCheckout && !showThankYou && (
+          <section className="checkout-layout">
+            <div className="checkout-main">
+              <h2 className="checkout-section-title">Enter Shipping Address</h2>
+              <div className="checkout-row">
+                <div className="checkout-field">
+                  <label>
+                    First name <span className="required">*</span>
+                  </label>
+                  <input type="text" placeholder="Placeholder" />
+                </div>
+                <div className="checkout-field">
+                  <label>
+                    Last name <span className="required">*</span>
+                  </label>
+                  <input type="text" placeholder="Placeholder" />
+                </div>
+              </div>
+
+              <div className="checkout-row">
+                <div className="checkout-field">
+                  <label>City <span className="required">*</span></label>
+                  <input type="text" placeholder="Placeholder" />
+                </div>
+                <div className="checkout-field">
+                  <label>Postal Code <span className="required">*</span></label>
+                  <input type="text" placeholder="Placeholder" />
+                </div>
+              </div>
+
+              <div className="checkout-row">
+                <div className="checkout-field">
+                  <label>Street Number &amp; PO box <span className="required">*</span></label>
+                  <input type="text" placeholder="Placeholder" />
+                </div>
+                <div className="checkout-field">
+                  <label>Company <span className="required">*</span></label>
+                  <input type="text" placeholder="Placeholder" />
+                </div>
+              </div>
+
+              <div className="checkout-row">
+                <div className="checkout-field full">
+                  <label>Country <span className="required">*</span></label>
+                  <div className="checkout-select">
+                    <input type="text" placeholder="Placeholder" />
+                    <span className="checkout-select-arrow">▾</span>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="checkout-section-title">Enter Contact Info</h2>
+              <div className="checkout-row">
+                <div className="checkout-field">
+                  <label>Email <span className="required">*</span></label>
+                  <input type="email" placeholder="Placeholder" />
+                </div>
+                <div className="checkout-field">
+                  <label>Mobile Number <span className="required">*</span></label>
+                  <input type="text" placeholder="Placeholder" />
+                </div>
+              </div>
+
+              <h2 className="checkout-section-title">Payment Method</h2>
+              <div className="payment-method-card">
+                <div className="payment-method-tabs">
+                  <button type="button" className="payment-tab active">
+                    ◉ Credit Card
+                  </button>
+                </div>
+
+                <div className="checkout-row">
+                  <div className="checkout-field">
+                    <label>Cardholder name <span className="required">*</span></label>
+                    <input type="text" placeholder="Christie Doe" />
+                  </div>
+                  <div className="checkout-field">
+                    <label>Card Number <span className="required">*</span></label>
+                    <input type="text" placeholder="5261 4141 0151 8472" />
+                  </div>
+                </div>
+
+                <div className="checkout-row">
+                  <div className="checkout-field">
+                    <label>Expiry date <span className="required">*</span></label>
+                    <input type="text" placeholder="06 / 2024" />
+                  </div>
+                  <div className="checkout-field">
+                    <label>CVV / CVC <span className="required">*</span></label>
+                    <input type="text" placeholder="915" />
+                  </div>
+                </div>
+
+                <div className="checkout-checkbox-row">
+                  <input type="checkbox" id="billingSame" />
+                  <label htmlFor="billingSame">
+                    Billing and Shipping details are the same
+                  </label>
+                </div>
+
+                <button
+                  type="button"
+                  className="place-order-btn"
+                  onClick={() => setShowThankYou(true)}
+                >
+                  Place Order
+                </button>
+
+                <p className="checkout-disclaimer">
+                  By continuing, I confirm that I have read and accept the Terms and Conditions and
+                  the Privacy Policy.
+                </p>
+              </div>
+            </div>
+
+            <aside className="checkout-summary">
+              <div className="checkout-summary-header">
+                <span className="checkout-summary-icon">🛒</span>
+                <h3>Cart Summary</h3>
+              </div>
+
+              <div className="checkout-summary-items">
+                <div className="checkout-summary-item">
+                  <div>
+                    <div className="cart-item-title">Revenue Rocket</div>
+                    <div className="cart-item-subtitle">
+                      Free Trail Insights Art Plan Ideal for beginner artists.
+                    </div>
+                  </div>
+                  <button type="button" className="cart-item-remove">
+                    🗑 Remove
+                  </button>
+                </div>
+
+                <div className="checkout-summary-item">
+                  <div>
+                    <div className="cart-item-title">Revenue Rocket</div>
+                    <div className="cart-item-subtitle">
+                      Free Trail Insights Art Plan Ideal for beginner artists.
+                    </div>
+                  </div>
+                  <button type="button" className="cart-item-remove">
+                    🗑 Remove
+                  </button>
+                </div>
+              </div>
+
+              <div className="checkout-summary-footer">
+                <span>SUBTOTAL - $696.69 USD</span>
+              </div>
+            </aside>
+          </section>
+        )}
+        {!showCheckout && !showThankYou && activeSection === 'analytics' && (
         <>
         <section className="tab-row">
           <button
@@ -614,7 +808,7 @@ const AnalyticsDashboard: React.FC = () => {
         </>
         )}
 
-        {activeSection === 'audit' && (
+        {!showCheckout && !showThankYou && activeSection === 'audit' && (
           <section className="card audit-card">
             <div className="audit-inner">
               <div className="audit-icon" />
@@ -629,7 +823,7 @@ const AnalyticsDashboard: React.FC = () => {
           </section>
         )}
 
-        {activeSection === 'packages' && (
+        {!showCheckout && !showThankYou && activeSection === 'packages' && (
           <section className="card packages-card">
             <div className="packages-tabs">
               <button
@@ -1333,12 +1527,247 @@ const AnalyticsDashboard: React.FC = () => {
           </section>
         )}
 
-        {activeSection === 'account' && (
-          <section className="card placeholder-card">
-            <p>Account view coming soon.</p>
+        {!showCheckout && !showThankYou && activeSection === 'account' && (
+          <section className="card account-card">
+            <div className="account-tabs">
+              <button
+                type="button"
+                className={`account-tab ${
+                  activeAccountTab === 'subscription' ? 'active' : ''
+                }`}
+                onClick={() => setActiveAccountTab('subscription')}
+              >
+                Subscription
+              </button>
+              <button
+                type="button"
+                className={`account-tab ${
+                  activeAccountTab === 'details' ? 'active' : ''
+                }`}
+                onClick={() => setActiveAccountTab('details')}
+              >
+                Account Details
+              </button>
+              <button
+                type="button"
+                className={`account-tab ${
+                  activeAccountTab === 'logout' ? 'active' : ''
+                }`}
+                onClick={() => setActiveAccountTab('logout')}
+              >
+                Logout
+              </button>
+            </div>
+
+            {activeAccountTab === 'subscription' && (
+              <div className="account-table-wrapper">
+                <table className="account-table">
+                  <thead>
+                    <tr>
+                      <th>Subscription ˇ</th>
+                      <th>Status ˇ</th>
+                      <th>Next payment ˇ</th>
+                      <th>Total ˇ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Revenue Rocket</td>
+                      <td>On hold</td>
+                      <td>-</td>
+                      <td>$349.00</td>
+                    </tr>
+                    <tr>
+                      <td>Revenue Rocket</td>
+                      <td>trash</td>
+                      <td>-</td>
+                      <td>$349.00 / month</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {activeAccountTab === 'details' && (
+              <div className="account-details">
+                <div className="account-avatar-section">
+                  <div className="account-avatar-circle">
+                    <img
+                      src="/images/profile.png"
+                      alt="Profile"
+                      className="account-avatar-img"
+                    />
+                  </div>
+                  <div className="account-avatar-actions">
+                    <button type="button" className="account-avatar-btn secondary">
+                      Remove Photo
+                    </button>
+                    <button type="button" className="account-avatar-btn primary">
+                      Change Photo
+                    </button>
+                  </div>
+                </div>
+
+                <form className="account-form">
+                  <div className="account-form-row">
+                    <div className="account-field">
+                      <label>
+                        First name <span className="required">*</span>
+                      </label>
+                      <input type="text" placeholder="Placeholder" />
+                    </div>
+                    <div className="account-field">
+                      <label>
+                        Last name <span className="required">*</span>
+                      </label>
+                      <input type="text" placeholder="Placeholder" />
+                    </div>
+                  </div>
+
+                  <div className="account-form-row">
+                    <div className="account-field">
+                      <label>
+                        Display name <span className="required">*</span>
+                      </label>
+                      <input type="text" placeholder="Placeholder" />
+                    </div>
+                    <div className="account-field">
+                      <label>
+                        Email address <span className="required">*</span>
+                      </label>
+                      <input type="email" placeholder="Placeholder" />
+                    </div>
+                  </div>
+
+                  <div className="account-section-heading">Password change</div>
+
+                  <div className="account-field full">
+                    <label>Current password (leave blank to leave unchanged)</label>
+                    <input type="password" placeholder="Placeholder" />
+                  </div>
+
+                  <div className="account-field full">
+                    <label>New password (leave blank to leave unchanged)</label>
+                    <input type="password" placeholder="Placeholder" />
+                  </div>
+
+                  <div className="account-field full">
+                    <label>Confirm new password</label>
+                    <input type="password" placeholder="Placeholder" />
+                  </div>
+
+                  <div className="account-form-actions">
+                    <button type="button" className="account-form-btn secondary">
+                      Cancel
+                    </button>
+                    <button type="submit" className="account-form-btn primary">
+                      Save Edits
+                    </button>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {activeAccountTab === 'logout' && (
+              <div className="logout-panel">
+                <div className="logout-icon-circle">
+                  <span className="logout-icon-mark">!</span>
+                </div>
+                <h2 className="logout-title">Log Out</h2>
+                <p className="logout-text">
+                  Are you sure you would like to log out of your
+                  <br />
+                  AI Mark Labs account?
+                </p>
+                <div className="logout-actions">
+                  <button type="button" className="logout-btn secondary">
+                    Cancel
+                  </button>
+                  <button type="button" className="logout-btn primary">
+                    Log Out
+                  </button>
+                </div>
+              </div>
+            )}
           </section>
         )}
       </main>
+      {isCartOpen && !showCheckout && !showThankYou && (
+        <div className="cart-overlay">
+          <div
+            className="cart-backdrop"
+            onClick={() => setIsCartOpen(false)}
+          />
+          <aside className="cart-panel">
+            <div className="cart-panel-header">
+              <h2>Cart</h2>
+              <button
+                type="button"
+                className="cart-close"
+                onClick={() => setIsCartOpen(false)}
+              >
+                ×
+              </button>
+            </div>
+            <p className="cart-greeting">
+              Good afternoon BOB! You have 4 pending orders.
+            </p>
+
+            <div className="cart-items">
+              <div className="cart-item">
+                <div>
+                  <div className="cart-item-title">Revenue Rocket</div>
+                  <div className="cart-item-subtitle">
+                    Free Trail Insights Art Plan Ideal for beginner artists.
+                  </div>
+                </div>
+                <button type="button" className="cart-item-remove">
+                  🗑 Remove
+                </button>
+              </div>
+
+              <div className="cart-item">
+                <div>
+                  <div className="cart-item-title">Revenue Rocket</div>
+                  <div className="cart-item-subtitle">
+                    Free Trail Insights Art Plan Ideal for beginner artists.
+                  </div>
+                </div>
+                <button type="button" className="cart-item-remove">
+                  🗑 Remove
+                </button>
+              </div>
+            </div>
+
+            <div className="cart-summary">
+              <div className="cart-summary-row">
+                <span>SUBTOTAL</span>
+                <span>$696.69</span>
+              </div>
+              <div className="cart-summary-row">
+                <span>ESTIMATED SALES TAX</span>
+                <span>$0.00</span>
+              </div>
+            </div>
+
+            <div className="cart-total">
+              <span>TOTAL</span>
+              <span className="cart-total-amount">$696.69 USD</span>
+            </div>
+
+            <button
+              type="button"
+              className="cart-checkout"
+              onClick={() => {
+                setIsCartOpen(false);
+                setShowCheckout(true);
+              }}
+            >
+              Check Out
+            </button>
+          </aside>
+        </div>
+      )}
     </div>
   );
 };
