@@ -1,21 +1,38 @@
 import React, { useState } from 'react';
+import { ADMIN_EMAILS, ADMIN_PASSWORD, getUsers } from '../utils/auth';
 
 interface LoginProps {
   onGoToSignUp?: () => void;
-  onLoginSuccess?: () => void;
+  onLoginSuccess?: (destination: string) => void;
 }
 
 const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-//red
+  const [error, setError] = useState('');
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login attempted with:', { username, password });
-    if (username && password) {
-      onLoginSuccess?.();
+    setError('');
+    const users = getUsers();
+    if (ADMIN_EMAILS.includes(username)) {
+      if (password !== ADMIN_PASSWORD) {
+        setError('Invalid username or password.');
+        return;
+      }
+      onLoginSuccess?.('/admin');
+      return;
     }
+    const user = users.find((record) => record.username === username);
+    if (!user || user.password !== password) {
+      setError('Invalid username or password.');
+      return;
+    }
+    const destination = user.clientSlug
+      ? `/admin/client/${user.clientSlug}`
+      : '/dashboard';
+    onLoginSuccess?.(destination);
   };
 
   const togglePasswordVisibility = () => {
@@ -149,6 +166,10 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
                   )}
                 </button>
               </div>
+
+              {error ? (
+                <div className="text-sm text-red-500">{error}</div>
+              ) : null}
 
               {/* Login Button */}
               <button

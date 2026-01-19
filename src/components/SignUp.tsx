@@ -1,23 +1,75 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import {
+  getClients,
+  getUsers,
+  pickAccent,
+  saveClients,
+  saveUsers,
+  slugify,
+} from '../utils/auth';
 
 interface SignUpProps {
   onGoToLogin?: () => void;
-  onSignUpSuccess?: () => void;
+  onSignUpSuccess?: (destination: string) => void;
 }
 
 const SignUp: React.FC<SignUpProps> = ({ onGoToLogin, onSignUpSuccess }) => {
   const [username, setUsername] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [clientSlug, setClientSlug] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState('');
+
+  const resolvedSlug = useMemo(() => {
+    const base = clientSlug || companyName || username;
+    return base ? slugify(base) : '';
+  }, [clientSlug, companyName, username]);
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Sign up attempted with:', { username, password, confirmPassword });
-    if (username && password && password === confirmPassword) {
-      onSignUpSuccess?.();
+    setError('');
+    if (!username || !password) {
+      setError('Username and password are required.');
+      return;
     }
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+    if (!resolvedSlug) {
+      setError('Company name or client slug is required for clients.');
+      return;
+    }
+
+    const users = getUsers();
+    const existing = users.find((record) => record.username === username);
+    if (existing) {
+      setError('This user already exists.');
+      return;
+    }
+
+    const newUser = {
+      username,
+      password,
+      role: 'client' as const,
+      clientSlug: resolvedSlug,
+      companyName: companyName || username,
+    };
+    saveUsers([...users, newUser]);
+
+    const clients = getClients();
+    const exists = clients.some((client) => client.slug === resolvedSlug);
+    if (!exists) {
+      const name = companyName || username;
+      const accent = pickAccent(clients.length);
+      saveClients([...clients, { name, slug: resolvedSlug, accent }]);
+    }
+
+    const destination = `/admin/client/${resolvedSlug}`;
+    onSignUpSuccess?.(destination);
   };
 
   const togglePasswordVisibility = () => {
@@ -125,6 +177,34 @@ const SignUp: React.FC<SignUpProps> = ({ onGoToLogin, onSignUpSuccess }) => {
                 />
               </div>
 
+              <div>
+                <label className="block text-gray-700 text-sm font-medium mb-2">
+                  Company Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="AI Mark Labs"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f39c12] focus:border-transparent transition"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 text-sm font-medium mb-2">
+                  Client Slug
+                </label>
+                <input
+                  type="text"
+                  placeholder="ai-mark-labs"
+                  value={clientSlug}
+                  onChange={(e) => setClientSlug(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#f39c12] focus:border-transparent transition"
+                />
+                <p className="text-xs text-gray-400 mt-1">
+                  Suggested: {resolvedSlug || 'your-company'}
+                </p>
+              </div>
+
               {/* Password Field */}
               <div className="relative">
                 <label className="block text-gray-700 text-sm font-medium mb-2">
@@ -187,6 +267,10 @@ const SignUp: React.FC<SignUpProps> = ({ onGoToLogin, onSignUpSuccess }) => {
                 </button>
               </div>
 {/* gd */}
+              {error ? (
+                <div className="text-sm text-red-500">{error}</div>
+              ) : null}
+
               {/* Create Account Button */}
               <button
                 type="submit"

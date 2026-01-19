@@ -1,32 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import AdminClientDashboard from './AdminClientDashboard';
+import AdminDashboard from './AdminDashboard';
+import AdminAccount from './AdminAccount';
 import AnalyticsDashboard from './AnalyticsDashboard';
 import Login from './components/ Login';
 import SignUp from './components/SignUp';
 
-type View = 'login' | 'signup' | 'dashboard';
+const LoginRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return (
+    <Login
+      onGoToSignUp={() => navigate('/signup')}
+      onLoginSuccess={(destination) => navigate(destination)}
+    />
+  );
+};
+
+const SignUpRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return (
+    <SignUp
+      onGoToLogin={() => navigate('/login')}
+      onSignUpSuccess={(destination) => navigate(destination)}
+    />
+  );
+};
 
 const App: React.FC = () => {
-  const [view, setView] = useState<View>('login');
-
-  if (view === 'login') {
-    return (
-      <Login
-        onGoToSignUp={() => setView('signup')}
-        onLoginSuccess={() => setView('dashboard')}
-      />
-    );
-  }
-
-  if (view === 'signup') {
-    return (
-      <SignUp
-        onGoToLogin={() => setView('login')}
-        onSignUpSuccess={() => setView('dashboard')}
-      />
-    );
-  }
-
-  return <AnalyticsDashboard />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/login" element={<LoginRoute />} />
+        <Route path="/signup" element={<SignUpRoute />} />
+        <Route path="/dashboard" element={<AnalyticsDashboard />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/account" element={<AdminAccount />} />
+        <Route path="/admin/client/:slug" element={<AdminClientDashboard />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default App;
