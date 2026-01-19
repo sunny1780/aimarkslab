@@ -12,7 +12,7 @@ const LoginRoute: React.FC = () => {
   return (
     <Login
       onGoToSignUp={() => navigate('/signup')}
-      onLoginSuccess={(destination) => navigate(destination)}
+      onLoginSuccess={() => navigate('/dashboard')}
     />
   );
 };
