@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { fetchMetricoolData, MetricoolData, MetricoolPost } from '../services/metricoolService';
 import '../App.css';
 
@@ -7,13 +7,9 @@ const MetaAnalyticsSection: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activePostTab, setActivePostTab] = useState<'engagements' | 'clicks' | 'impressions'>('engagements');
-  const [dateRange, setDateRange] = useState({ start: '2025-11-11', end: '2025-12-10' });
+  const [dateRange] = useState({ start: '2025-11-11', end: '2025-12-10' });
 
-  useEffect(() => {
-    loadData();
-  }, [dateRange]);
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -25,7 +21,11 @@ const MetaAnalyticsSection: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [dateRange]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
