@@ -6,6 +6,7 @@ import AdminAccount from './AdminAccount';
 import AnalyticsDashboard from './AnalyticsDashboard';
 import Login from './components/ Login';
 import SignUp from './components/SignUp';
+import Home from './pages/Home';
 
 const LoginRoute: React.FC = () => {
   const navigate = useNavigate();
@@ -27,18 +28,23 @@ const SignUpRoute: React.FC = () => {
   );
 };
 
+const HomeRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return <Home onLoginClick={() => navigate('/login')} />;
+};
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<HomeRoute />} />
         <Route path="/login" element={<LoginRoute />} />
         <Route path="/signup" element={<SignUpRoute />} />
         <Route path="/dashboard" element={<AnalyticsDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/account" element={<AdminAccount />} />
         <Route path="/admin/client/:slug" element={<AdminClientDashboard />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );

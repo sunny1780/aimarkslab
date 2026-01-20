@@ -24,7 +24,7 @@ const Hero: React.FC = () => {
             <img
               src="/images/Aa.png"
               alt="Aa card"
-              className="absolute -top-16 left-64 w-24 h-auto object-contain"
+              className="absolute -top-16 left-[300px] w-24 h-auto object-contain"
             />
 
             {/* Bottom left Full-Stack pill image */}
@@ -44,10 +44,19 @@ const Hero: React.FC = () => {
 
           {/* Right side - services list */}
           <div className="flex-1 flex justify-end">
-            <div className="mt-10 mr-4 text-right space-y-1 text-[11px] text-gray-700">
-              <p>ui/ux design</p>
-              <p>digital marketing</p>
-              <p>web development</p>
+            <div className="-mt-[112px] mr-24 text-left space-y-1 text-[16px] text-gray-700">
+              <div>
+                <p>ui/ux design</p>
+                <img src="/images/Line.png" alt="line" className="mt-1" />
+              </div>
+              <div>
+                <p>digital marketing</p>
+                <img src="/images/Line.png" alt="line" className="mt-1" />
+              </div>
+              <div>
+                <p>web development</p>
+                <img src="/images/Line.png" alt="line" className="mt-1" />
+              </div>
             </div>
           </div>
         </div>
